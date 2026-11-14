@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Produto</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+    <h1 th:text="${produto.id == null} ? 'Novo Produto' : 'Editar Produto'"></h1>
+
+    <form th:action="@{/produtos/salvar}" th:object="${produto}" method="post">
+        <input type="hidden" th:field="*{id}">
+
+        <label>Nome:</label>
+        <input type="text" th:field="*{nome}">
+        <span class="erro" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+
+        <label>Preço:</label>
+        <input type="number" step="0.01" th:field="*{preco}">
+        <span class="erro" th:if="${#fields.hasErrors('preco')}" th:errors="*{preco}"></span>
+
+        <label>Estoque:</label>
+        <input type="number" th:field="*{estoque}">
+        <span class="erro" th:if="${#fields.hasErrors('estoque')}" th:errors="*{estoque}"></span>
+
+        <button type="submit" class="btn">Salvar</button>
+        <a th:href="@{/produtos}" class="btn btn-danger">Cancelar</a>
+    </form>
+</body>
+</html>
